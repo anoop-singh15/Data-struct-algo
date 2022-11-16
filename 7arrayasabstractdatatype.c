@@ -1,0 +1,1 @@
+// MAKE A STRUCTURE OF MY arraY
