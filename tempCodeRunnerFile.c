@@ -1,1 +1,0 @@
-ks, number_o
