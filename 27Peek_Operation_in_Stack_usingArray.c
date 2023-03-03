@@ -54,7 +54,7 @@ void pop(struct stack *ptr)
     }
 }
 
-// Peek Operation code in Reverse
+// Peek Operation code 
 int peek(struct stack *ptr, int i)
 {
     if (ptr->top - i + 1 < 0)
