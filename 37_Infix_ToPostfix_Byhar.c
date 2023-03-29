@@ -70,79 +70,76 @@ void push(struct array *ptr, char value)
     }
 }
 
-void postfix(char *arr)
+int precedence(char ch)
+{
+    if(ch=='*' || ch=='/' )
+    {
+        return 3;
+    }
+    else  if(ch=='+' || ch=='-' )
+    {
+        return 2;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int isOperator(char ch)
+{
+    if(ch=='+' || ch=='-' || ch=='*' || ch=='/')
+    {
+        return 1;
+    }
+    return 0;
+}
+
+
+void *postfix(char *arr)
 {
     struct array *a = (struct array *)malloc(sizeof(struct array));
-    a->size = 50;
+    a->size = 20;
     a->top = -1;
     a->arraystack = (char *)malloc(a->size * sizeof(char));
+    char *arr1 = (char *)malloc(strlen(arr) + 1 * sizeof(char));
     int d = 0;
-    char arr1[d];
-    char *ptr = arr1;
     for (int i = 0; arr[i] != '\0'; i++)
     {
-        printf("index-------%d-------CHARACTER-----%c----\n", i, arr[i]);
-        if (arr[i] == '-' || arr[i] == '+')
-        {
-            if (isEmpty(a) || stackTop(a) == '+' || stackTop(a) == '-')
-            {
-                push(a, arr[i]);
-            }
-            else
-            {
-                while (!isEmpty(a))
-                {
-                    arr1[d++] = pop(a);
-                }
-                push(a, arr[i]);
-            }
-        }
-        else if (arr[i] == '*' || arr[i] == '/')
-        {
-            if (isEmpty(a) || stackTop(a) == '+' || stackTop(a) == '-' || stackTop(a) == '*' || stackTop(a) == '/')
-            {
-                push(a, arr[i]);
-            }
-            else
-            {
-                while (!isEmpty(a))
-                {
-                    arr1[d++] = pop(a);
-                }
-                push(a, arr[i]);
-            }
-        }
-        else
+        if (!isOperator(arr[i]))
         {
             arr1[d++] = arr[i];
         }
+        else
+        {
+            if (precedence(arr[i]) > precedence(stackTop(a)))
+            {
+                push(a, arr[i]);
+            }
+            else
+            {
+                while(!isEmpty(a))
+                {
+                     arr1[d++]=pop(a); 
+                }
+                push(a,arr[i]);
+               
+            }
+        }
     }
 
-    while (!isEmpty(a))
+    while(!isEmpty(a))
     {
-        arr1[d++] = pop(a);
+        arr1[d++]=pop(a);
     }
-
-    stackTraversal(a);
-
-    printf("\nPOSTFIX NOTATION IS= ");
-    for (int i = 0; i < d; i++)
-    {
-        printf("%c", arr1[i]);
-    }
-    printf("\n\n");
+    arr1[d]='\0';
+    return arr1;
 }
 
 int main()
 {
-
-    // char *arr = "x-y/z-k*d";
-    // char *arr = "x-y*z";
-    // char *arr = "a-b*d+c";
-    // char *arr = "A*B+C/D"; WRONG ANSWER
-    char *arr = "x-y*z";
-
-    postfix(arr);
+    char *arr = "x-y/z-k*d";
+    printf("Postfix Notation is %s\n", postfix(arr));
 
     return 0;
 }
