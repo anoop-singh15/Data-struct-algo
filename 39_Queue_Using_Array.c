@@ -83,9 +83,19 @@ int Dequeue(qa *ptr)
 
 void QueueTraversal(qa *ptr)
 {
-    for (int i = 0; i <= ptr->back_index; i++)
+    if (ptr->front_index == -1)
     {
-        printf("Index %d Element %d\n", i, ptr->arr[i]);
+        for (int i = 0; i <= ptr->back_index; i++)
+        {
+            printf("Index %d Element %d\n", i, ptr->arr[i]);
+        }
+    }
+    else
+    {
+        for (int i = ptr->front_index; i <= ptr->back_index; i++)
+        {
+            printf("Index %d Element %d\n", i, ptr->arr[i]);
+        }
     }
 }
 
@@ -96,6 +106,7 @@ int main()
     a->back_index = -1;
     a->front_index = -1;
     a->arr = (int *)malloc(a->size * sizeof(int));
+    QueueTraversal(a);
     Enqueue(a, 1);
     Enqueue(a, 2);
     Enqueue(a, 3);
@@ -105,6 +116,7 @@ int main()
     QueueTraversal(a);
     printf("Top %d\n", queueTop(a));
     Dequeue(a);
+    QueueTraversal(a);
     Dequeue(a);
     printf("Bottom %d\n", queueBottom(a));
     Dequeue(a);
@@ -115,6 +127,7 @@ int main()
     Dequeue(a);
     Dequeue(a);
     Dequeue(a);
+    QueueTraversal(a);
 
     free(a);
 
