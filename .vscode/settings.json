@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "7ARRAYasADT.C": "cpp"
+        "7ARRAYasADT.C": "cpp",
+        "random": "c"
     }
 }
