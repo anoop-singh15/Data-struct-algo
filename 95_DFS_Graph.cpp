@@ -6,6 +6,11 @@
 
 using namespace std;
 
+
+// TC =O(n)
+// SC =O(n)
+
+
 void dfs(int node,unordered_map<int,list<int>>&adj, unordered_map<int,bool>&v, vector<int>&comp)
 {
     comp.push_back(node);
