@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "7ARRAYasADT.C": "cpp",
-        "random": "c"
+        "random": "c",
+        "unordered_map": "cpp"
     }
 }
