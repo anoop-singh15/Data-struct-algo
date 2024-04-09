@@ -3,6 +3,9 @@
         "7ARRAYasADT.C": "cpp",
         "random": "c",
         "unordered_map": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "chrono": "cpp",
+        "limits": "cpp",
+        "valarray": "cpp"
     }
 }
