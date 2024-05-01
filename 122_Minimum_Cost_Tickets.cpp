@@ -2,6 +2,9 @@
 #include <vector>
 #include <algorithm>
 #include <limits.h>
+
+#include<utility>
+#include<queue>
 using namespace std;
 
 // Recursion solution
@@ -89,7 +92,31 @@ int minimumCoins(int n, vector<int> days, vector<int> cost)
     // return ans;
 
     // Tabulation
-    return solveTab(n,days,cost);
+    // return solveTab(n,days,cost);
+
+
+    // Space OPTIMISATION
+    int ans=0;
+    queue<pair<int,int>>month;
+    queue<pair<int,int>>week;
+    for(auto days:days)
+    {
+        while(!month.empty() && (month.front().first+30)<=days)
+        {
+            month.pop();
+        }
+        while(!week.empty() && (week.front().first+7)<=days)
+        {
+            week.pop();
+        }
+
+        week.push(make_pair(days,ans+cost[1]));
+        month.push(make_pair(days,ans+cost[2]));
+
+        ans=min(ans+cost[0],min(week.front().second,month.front().second));
+    }
+    return ans;
+
 }
 
 int main()
