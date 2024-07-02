@@ -74,7 +74,7 @@ public:
         return dp[0][0];
     }
 
-    // top Down dp
+    // Space Optimisation
     // TC=>O(N*M)
     // SC=>O(M)
     int solveSpace(string &a, string &b)
